@@ -1,9 +1,31 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+import Image from "next/image"
+import styles from "./page.module.css"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "@/app/firebase/config"
+import { useRouter } from "next/navigation"
+import { signOut } from "firebase/auth"
 
 export default function Home() {
+  const [user] = useAuthState(auth)
+  const router = useRouter()
+
+  const userSession = sessionStorage.getItem("user")
+
+  if (!user && !userSession) {
+    router.push("/sign-up")
+  }
+
   return (
     <main className={styles.main}>
+      <button
+        onClick={() => {
+          signOut(auth)
+          sessionStorage.removeItem("user")
+        }}
+      >
+        Log out
+      </button>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
@@ -91,5 +113,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  );
+  )
 }

@@ -27,6 +27,11 @@
 .form {
 }
 
+.heading {
+  color: black;
+  margin-bottom: 25px;
+}
+
 .form__group {
   display: flex;
   flex-direction: column;

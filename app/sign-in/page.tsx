@@ -2,10 +2,11 @@
 import React, { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { SignupInputs } from "../types"
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth"
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth"
 import { auth } from "@/app/firebase/config"
 
 import styles from "../styles/auth.module.css"
+import { useRouter } from "next/navigation"
 
 export default function SignUp() {
   const {
@@ -15,18 +16,17 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<SignupInputs>()
 
-  const [createUserWithEmailAndPassword] =
-    useCreateUserWithEmailAndPassword(auth)
+  const router = useRouter()
+
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
 
   const onSubmit: SubmitHandler<SignupInputs> = async (data) => {
     try {
-      const res = await createUserWithEmailAndPassword(
-        data.email,
-        data.password
-      )
+      const res = await signInWithEmailAndPassword(data.email, data.password)
       sessionStorage.setItem("user", "true")
       console.log(res)
       reset()
+      router.push("/")
     } catch (e) {
       console.error(e)
     }
@@ -36,7 +36,7 @@ export default function SignUp() {
     <div className={styles.container}>
       <div className={styles.body}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <h2 className={styles.heading}>Sign up</h2>
+          <h2 className={styles.heading}>Sign in</h2>
           <div className={styles.form__group}>
             <label htmlFor="emailInput" className={styles.form__label}>
               Email
@@ -68,7 +68,7 @@ export default function SignUp() {
             />
           </div>
           <div className={styles.form__group}>
-            <input type="submit" className={styles.submit} value="Sign Up" />
+            <input type="submit" className={styles.submit} value="Sign In" />
           </div>
         </form>
       </div>
