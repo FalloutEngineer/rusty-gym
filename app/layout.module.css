@@ -1,3 +1,5 @@
-.locked {
-  overflow-y: hidden !important;
+@media (max-width: 991px) {
+  .locked {
+    overflow-y: hidden !important;
+  }
 }

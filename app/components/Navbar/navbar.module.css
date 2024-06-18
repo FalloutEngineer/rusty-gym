@@ -92,12 +92,14 @@
     overflow: hidden;
     max-width: 100%;
 
-    padding: 5px 0px;
+    padding: 0px 0px;
   }
 
   .section {
     flex-grow: 1;
     flex-basis: 1;
+
+    box-sizing: border-box;
 
     width: 100% !important;
 
@@ -110,6 +112,7 @@
 
   .section:nth-child(1) {
     background-color: rgb(var(--background-end-rgb));
+    padding: 5px 0px;
   }
 
   .mobileBody {
@@ -138,30 +141,35 @@
   }
 
   .list {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    gap: 0;
     font-size: 48px;
 
-    overflow-y: scroll;
-    max-height: 80%;
+    display: block;
 
+    height: fit-content;
     max-height: 100%;
+
+    overflow-y: scroll;
   }
 
   .mobileBody .section:nth-child(1) {
     max-height: 70%;
+    height: 100%;
 
     margin-top: 44px;
 
     padding-top: 5px;
     padding-bottom: 5px;
+
+    position: relative;
   }
 
   .item {
     width: 100%;
+
+    display: flex;
+
+    box-sizing: border-box;
   }
 
   .link {

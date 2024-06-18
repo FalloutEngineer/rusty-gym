@@ -5,9 +5,13 @@ import { usePathname } from "next/navigation"
 
 import styles from "./navbar.module.css"
 import Logo from "./Logo"
-import { profile } from "console"
+
+import { useStore } from "../../store"
 
 export default function Navbar() {
+  const isMenuOpen = useStore((state) => state.isMenuOpen)
+  const toggleMenu = useStore((state) => state.toggleMenu)
+
   const { user, googleSignIn, logOut } = UserAuth()
 
   const [loading, setLoading] = useState(true)
@@ -47,7 +51,9 @@ export default function Navbar() {
       <div className={styles.section}>
         <Logo />
       </div>
-      <div className={styles.mobileBody + " " + styles.activeMenu}>
+      <div
+        className={styles.mobileBody + " " + (isMenuOpen && styles.activeMenu)}
+      >
         <div className={styles.section}>
           <ul className={styles.list}>
             <li className={styles.item}>
@@ -124,7 +130,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      <button className={styles.burger + " " + styles.activeBurger}>
+      <button
+        onClick={toggleMenu}
+        className={styles.burger + " " + (isMenuOpen && styles.activeBurger)}
+      >
         <span></span>
         <span></span>
         <span></span>

@@ -147,3 +147,7 @@ a {
   -ms-flex-direction: column;
   flex-direction: column;
 }
+
+button {
+  cursor: pointer;
+}
