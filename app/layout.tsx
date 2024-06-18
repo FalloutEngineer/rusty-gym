@@ -3,9 +3,11 @@
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { AuthContextProvider } from "./context/AuthContext"
-import Navbar from "./components/navbar"
+import Navbar from "./components/Navbar/Navbar"
 
 const inter = Inter({ subsets: ["latin"] })
+
+import styles from "./layout.module.css"
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -18,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={styles.locked}>
       <body className={inter.className}>
         <AuthContextProvider>
           <Navbar />
