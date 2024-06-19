@@ -7,7 +7,7 @@ import MenuButton from "../../components/Dashboard/MenuButton"
 export default function FreeTrainings() {
   return (
     <div className={styles.dashboard}>
-      <h1 className={styles.dashHeading}>Trainings</h1>
+      <h2 className={styles.dashHeading}>Trainings</h2>
       <Grid>
         <MenuButton
           title={"Push Ups"}

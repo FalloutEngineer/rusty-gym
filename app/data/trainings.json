@@ -5,7 +5,7 @@
       "categoryUrl": "pushUps",
       "trainings": [
         {
-          "url": "pushUps",
+          "url": "regular",
           "name": "Push Ups",
           "startingModifier": 0.6,
           "approachModifier": 0.85,
@@ -13,7 +13,7 @@
           "imageUrl": ""
         },
         {
-          "url": "widePushUps",
+          "url": "wide",
           "name": "Wide Push Ups",
           "startingModifier": 0.6,
           "approachModifier": 0.85,
@@ -21,7 +21,7 @@
           "imageUrl": ""
         },
         {
-          "url": "kneePushUps",
+          "url": "knee",
           "name": "Knee Push Ups",
           "startingModifier": 0.6,
           "approachModifier": 0.85,
@@ -29,7 +29,7 @@
           "imageUrl": ""
         },
         {
-          "url": "diamondPushUps",
+          "url": "diamond",
           "name": "Diamond Push Ups",
           "startingModifier": 0.6,
           "approachModifier": 0.85,
@@ -43,7 +43,7 @@
       "categoryUrl": "pullUps",
       "trainings": [
         {
-          "url": "pullUps",
+          "url": "regular",
           "name": "Pull Ups",
           "startingModifier": 0.6,
           "approachModifier": 0.85,
@@ -51,7 +51,7 @@
           "imageUrl": ""
         },
         {
-          "url": "chinUps",
+          "url": "chin",
           "name": "Chin Ups",
           "startingModifier": 0.6,
           "approachModifier": 0.85,

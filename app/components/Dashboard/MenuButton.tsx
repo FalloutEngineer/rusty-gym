@@ -15,8 +15,8 @@ export default function MenuButton({
 }) {
   return (
     <Link href={href} className={styles.menuButton}>
-      {image && (
-        <div className={styles.imageWrapper}>
+      <div className={styles.imageWrapper}>
+        {image && (
           <Image
             fill={true}
             objectFit="cover"
@@ -24,8 +24,9 @@ export default function MenuButton({
             alt={title}
             className={styles.image}
           />
-        </div>
-      )}
+        )}
+      </div>
+
       <div className={styles.bottom}>
         <p className={styles.title}>{title}</p>
       </div>
