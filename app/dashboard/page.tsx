@@ -11,7 +11,7 @@ export default function Dashboard() {
       <Grid>
         <MenuButton
           title={"Free Trainings"}
-          href={"./dashboard/freeTrainings"}
+          href={"./dashboard/trainings"}
           image={"/next.svg"}
         />
         <MenuButton

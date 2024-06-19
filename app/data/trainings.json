@@ -1,0 +1,64 @@
+{
+  "trainings": [
+    {
+      "categoryName": "Push Ups",
+      "categoryUrl": "pushUps",
+      "trainings": [
+        {
+          "url": "pushUps",
+          "name": "Push Ups",
+          "startingModifier": 0.6,
+          "approachModifier": 0.85,
+          "dayModifier": 1.1,
+          "imageUrl": ""
+        },
+        {
+          "url": "widePushUps",
+          "name": "Wide Push Ups",
+          "startingModifier": 0.6,
+          "approachModifier": 0.85,
+          "dayModifier": 1.1,
+          "imageUrl": ""
+        },
+        {
+          "url": "kneePushUps",
+          "name": "Knee Push Ups",
+          "startingModifier": 0.6,
+          "approachModifier": 0.85,
+          "dayModifier": 1.1,
+          "imageUrl": ""
+        },
+        {
+          "url": "diamondPushUps",
+          "name": "Diamond Push Ups",
+          "startingModifier": 0.6,
+          "approachModifier": 0.85,
+          "dayModifier": 1.1,
+          "imageUrl": ""
+        }
+      ]
+    },
+    {
+      "categoryName": "Pull Ups",
+      "categoryUrl": "pullUps",
+      "trainings": [
+        {
+          "url": "pullUps",
+          "name": "Pull Ups",
+          "startingModifier": 0.6,
+          "approachModifier": 0.85,
+          "dayModifier": 1.1,
+          "imageUrl": ""
+        },
+        {
+          "url": "chinUps",
+          "name": "Chin Ups",
+          "startingModifier": 0.6,
+          "approachModifier": 0.85,
+          "dayModifier": 1.1,
+          "imageUrl": ""
+        }
+      ]
+    }
+  ]
+}
