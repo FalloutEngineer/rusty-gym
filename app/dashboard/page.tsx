@@ -10,13 +10,13 @@ export default function Dashboard() {
       <h1 className={styles.dashHeading}>Dashboard</h1>
       <Grid>
         <MenuButton
-          title={"Free Train"}
-          href={"./freeTraining"}
+          title={"Free Trainings"}
+          href={"./dashboard/freeTrainings"}
           image={"/next.svg"}
         />
         <MenuButton
           title={"Program"}
-          href={"./training"}
+          href={"./dashboard/program"}
           image={"/vercel.svg"}
         />
       </Grid>

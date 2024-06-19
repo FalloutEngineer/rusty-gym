@@ -18,7 +18,7 @@ export default function Navbar() {
 
   const pathname = usePathname()
 
-  const isActive = (href: string) => pathname === href
+  const isActive = (href: string) => pathname.split("/").includes(href)
 
   const handleSignIn = async () => {
     try {
@@ -60,7 +60,7 @@ export default function Navbar() {
               <Link
                 href="/"
                 className={
-                  styles.link + " " + (isActive("/") ? styles.active : "")
+                  styles.link + " " + (pathname === "/" ? styles.active : "")
                 }
               >
                 Home
@@ -73,7 +73,7 @@ export default function Navbar() {
                   className={
                     styles.link +
                     " " +
-                    (isActive("/dashboard") ? styles.active : "")
+                    (isActive("dashboard") ? styles.active : "")
                   }
                 >
                   Dashboard
@@ -84,7 +84,7 @@ export default function Navbar() {
               <Link
                 href="/about"
                 className={
-                  styles.link + " " + (isActive("/about") ? styles.active : "")
+                  styles.link + " " + (isActive("about") ? styles.active : "")
                 }
               >
                 About
@@ -114,7 +114,7 @@ export default function Navbar() {
             </ul>
           ) : (
             <div className={styles.userBlock}>
-              <Link className={styles.profileButton} href="/profile">
+              <Link className={styles.profileButton} href="profile">
                 {user.displayName}
               </Link>
               <button

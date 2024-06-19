@@ -116,6 +116,8 @@ body {
     rgb(var(--background-start-rgb));
 
   position: relative;
+
+  overflow-y: hidden;
 }
 
 .wrapper {
