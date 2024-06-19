@@ -9,8 +9,6 @@ export default function Training() {
 export async function getStaticPaths() {
   const paths: { params: { category: string; name: string } }[] = []
 
-  console.log(data.trainings)
-
   data.trainings.forEach((category) => {
     category.trainings.forEach((training) => {
       paths.push({
