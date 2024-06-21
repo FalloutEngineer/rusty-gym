@@ -8,37 +8,73 @@
 }
 
 .subheading {
+  font-size: 22px;
 }
 
 .menu {
+}
+
+.menuList {
+  display: flex;
+
+  list-style: none;
+
+  gap: 10px;
+
+  margin-top: 10px;
+
+  margin-bottom: 7px;
+}
+
+.menuItem {
+  display: flex;
+  height: auto;
+  width: auto;
+  aspect-ratio: 1;
 }
 
 .trainingContainer {
 }
 
 .daysList {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 25px;
+
+  gap: 40px;
 }
 
 .dayItem {
+  position: relative;
+  display: flex;
 }
 
-.dayItemButtonWrapper {
+.dayItem:not(:last-child)::after {
+  content: "1 Day rest";
+  position: absolute;
+
+  bottom: 0;
+  left: 50%;
+
+  transform: translate(-50%, 150%);
+
+  background-color: rgb(65, 65, 65);
+
+  padding: 0 15px;
 }
 
-.dayLeft {
-}
+.dayItem:not(:last-child)::before {
+  content: "";
+  position: absolute;
 
-.dayRight {
-}
+  bottom: -20px;
+  left: 0;
 
-.dayList {
-}
+  width: 100%;
+  height: 2px;
 
-.dayApproaches {
-}
-
-.dayApproach {
-}
-
-.completion {
+  background-color: rgb(133, 133, 133);
 }

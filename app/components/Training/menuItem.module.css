@@ -1,5 +1,29 @@
 .item {
+  display: flex;
+
+  width: 55px;
+  height: 55px;
+  background-color: gray;
+
+  border: none;
+
+  position: relative;
 }
 
-.active {
+.item:hover {
+  background-color: rgb(151, 151, 151);
+}
+
+.item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: rgb(68, 68, 68);
+}
+
+.item.active::after {
+  background-color: var(--main-color);
 }

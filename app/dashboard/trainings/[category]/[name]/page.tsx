@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
 
@@ -5,6 +6,8 @@ import data from "../../../../data/trainings.json"
 
 import styles from "./styles.module.css"
 import TrainingMenuItem from "@/app/components/Training/TrainingMenuItem"
+import DayTraining from "@/app/components/Training/DayTraining"
+import MeasurementDay from "@/app/components/Training/MeasurementDay"
 
 export default function Training() {
   return (
@@ -14,15 +17,15 @@ export default function Training() {
         <h2 className={styles.heading}>Regular Push Ups</h2>
       </div>
       <nav className={styles.menu}>
-        <ul className="menuList">
-          <li className="menuItem">
+        <ul className={styles.menuList}>
+          <li className={styles.menuItem}>
+            <TrainingMenuItem isActive={true} iconURL={undefined} />
+          </li>
+          <li className={styles.menuItem}>
             <TrainingMenuItem isActive={false} iconURL={undefined} />
           </li>
-          <li className="menuItem">
-            <TrainingMenuItem />
-          </li>
-          <li className="menuItem">
-            <TrainingMenuItem />
+          <li className={styles.menuItem}>
+            <TrainingMenuItem isActive={false} iconURL={undefined} />
           </li>
         </ul>
       </nav>
@@ -30,21 +33,37 @@ export default function Training() {
         <h3 className={styles.subheading}>Workout plan</h3>
         <ul className={styles.daysList}>
           <li className={styles.dayItem}>
-            <button className={styles.dayItemButtonWrapper}>
-              <div className={styles.dayLeft}>
-                <span>1</span> <span>Day</span>
-              </div>
-              <div className={styles.dayRight}>
-                <ul className={styles.dayApproaches}>
-                  <li className={styles.dayApproach}>10</li>
-                  <li className={styles.dayApproach}>9</li>
-                  <li className={styles.dayApproach}>8</li>
-                  <li className={styles.dayApproach}>7</li>
-                  <li className={styles.dayApproach}>6</li>
-                </ul>
-                <div className={styles.completion}>V</div>
-              </div>
-            </button>
+            <DayTraining
+              onClick={() =>
+                console.error("Day Training function not implemented")
+              }
+              day={1}
+            />
+          </li>
+          <li className={styles.dayItem}>
+            <DayTraining
+              onClick={() =>
+                console.error("Day Training function not implemented")
+              }
+              day={2}
+              restTime={90}
+            />
+          </li>
+          <li className={styles.dayItem}>
+            <DayTraining
+              onClick={() =>
+                console.error("Day Training function not implemented")
+              }
+              day={3}
+              restTime={120}
+            />
+          </li>
+          <li className={styles.dayItem}>
+            <MeasurementDay
+              onClick={() =>
+                console.error("Measurement Day function not implemented")
+              }
+            />
           </li>
         </ul>
       </div>

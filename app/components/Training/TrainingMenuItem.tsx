@@ -15,11 +15,11 @@ export default function TrainingMenuItem({
   onClick,
 }: ITrainingMenuItemProps) {
   return (
-    <div
-      className={styles.item + " " + isActive ? styles.active : ""}
+    <button
+      className={styles.item + " " + (isActive ? styles.active : "")}
       onClick={onClick}
     >
       {iconURL && <Image src={iconURL} alt={""} />}
-    </div>
+    </button>
   )
 }
