@@ -2,24 +2,35 @@
 import React from "react"
 
 import styles from "./dayTraining.module.css"
+import Link from "next/link"
 
 interface IDayTrainingProps {
-  onClick: () => void
+  link: string
   restTime?: number
   day?: number
   reps?: number[]
+  isEnabled?: boolean
   isComplete?: boolean
 }
 
 export default function DayTraining({
-  onClick,
+  link,
   restTime = 60,
   day = 1,
   reps = [1, 1, 1, 1, 1],
+  isEnabled = true,
   isComplete = false,
 }: IDayTrainingProps) {
+  const isDisabled = !isEnabled || isComplete
   return (
-    <button className={styles.dayItemButtonWrapper} onClick={onClick}>
+    <Link
+      className={
+        styles.dayItemButtonWrapper + " " + (isDisabled ? styles.disabled : "")
+      }
+      aria-disabled={!isEnabled}
+      tabIndex={isEnabled ? undefined : -1}
+      href={link}
+    >
       <div className={styles.dayLeft}>
         <span className={styles.dayNumber}>{day}</span> <span>Day</span>
       </div>
@@ -35,12 +46,13 @@ export default function DayTraining({
           <span className={styles.restTime}>Rest time {restTime} sec</span>
         </div>
 
-        {isComplete ? (
-          <div className={styles.completion + " " + styles.complete}>V</div>
-        ) : (
-          <div className={styles.completion}>&gt;</div>
-        )}
+        {isEnabled &&
+          (isComplete ? (
+            <div className={styles.completion + " " + styles.complete}>V</div>
+          ) : (
+            <div className={styles.completion}>&gt;</div>
+          ))}
       </div>
-    </button>
+    </Link>
   )
 }

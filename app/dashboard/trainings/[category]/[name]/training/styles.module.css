@@ -1,0 +1,195 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.videoLink {
+  text-decoration: underline !important;
+
+  font-size: 28px;
+
+  font-weight: bold;
+}
+
+.videoLink:hover {
+  color: var(--main-color-hover);
+}
+
+.heading {
+  color: var(--main-color);
+
+  margin-bottom: 15px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  flex-grow: 1;
+
+  width: 100%;
+}
+
+.upper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+  width: 100%;
+
+  min-height: 66px;
+}
+
+.repButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 60px;
+  max-width: 60px;
+  max-height: 60px;
+
+  font-size: 33px;
+}
+
+.currentRep {
+  font-size: 54px;
+}
+
+.lower {
+  margin-top: 35px;
+
+  padding-top: 50px;
+
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.done {
+  font-size: 36px;
+
+  padding: 7px 15px;
+}
+
+.reps {
+  display: flex;
+
+  list-style: none;
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+.rep {
+  font-size: 36px;
+}
+
+.active {
+  color: var(--main-color);
+}
+
+.restHeading {
+  font-size: 46px;
+}
+
+.restNumber {
+  font-size: 46px;
+}
+
+.restWrapper {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  gap: 12px;
+}
+
+@media (max-width: 991px) {
+  .header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .videoLink {
+    font-size: 18px;
+  }
+
+  .heading {
+    margin-bottom: 7px;
+    font-size: 18px;
+  }
+
+  .upper {
+    gap: 15px;
+  }
+
+  .repButton {
+    width: 44px;
+    height: 44px;
+    max-width: 44px;
+    max-height: 44px;
+
+    font-size: 24px;
+  }
+
+  .currentRep {
+    font-size: 54px;
+  }
+
+  .lower {
+    margin-top: 3px;
+
+    padding-top: 5px;
+
+    justify-content: space-evenly;
+  }
+
+  .done {
+    font-size: 36px;
+
+    padding: 7px 15px;
+  }
+
+  .reps {
+    gap: 15px;
+
+    margin-top: 3px;
+  }
+
+  .rep {
+    font-size: 28px;
+  }
+
+  .restHeading {
+    font-size: 33px;
+  }
+
+  .restNumber {
+    font-size: 38px;
+  }
+}

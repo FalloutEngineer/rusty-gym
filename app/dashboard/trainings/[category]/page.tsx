@@ -14,8 +14,6 @@ export default function Trainings(props: any) {
 
   const categoryURL = category.categoryUrl
 
-  console.log(category.trainings)
-
   return (
     <div className={styles.dashboard}>
       <h2 className={styles.dashHeading}>{category.categoryName}</h2>

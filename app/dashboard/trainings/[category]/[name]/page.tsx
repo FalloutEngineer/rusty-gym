@@ -8,8 +8,13 @@ import styles from "./styles.module.css"
 import TrainingMenuItem from "@/app/components/Training/TrainingMenuItem"
 import DayTraining from "@/app/components/Training/DayTraining"
 import MeasurementDay from "@/app/components/Training/MeasurementDay"
+import { usePathname } from "next/navigation"
 
 export default function Training() {
+  const pathname = usePathname()
+
+  console.log(pathname)
+
   return (
     <div className={styles.body}>
       <div className={styles.header}>
@@ -34,36 +39,24 @@ export default function Training() {
         <ul className={styles.daysList}>
           <li className={styles.dayItem}>
             <DayTraining
-              onClick={() =>
-                console.error("Day Training function not implemented")
-              }
               day={1}
+              link={pathname + "/training"}
+              isComplete={true}
             />
           </li>
           <li className={styles.dayItem}>
-            <DayTraining
-              onClick={() =>
-                console.error("Day Training function not implemented")
-              }
-              day={2}
-              restTime={90}
-            />
+            <DayTraining day={2} restTime={90} link={pathname + "/training"} />
           </li>
           <li className={styles.dayItem}>
             <DayTraining
-              onClick={() =>
-                console.error("Day Training function not implemented")
-              }
               day={3}
               restTime={120}
+              link={pathname + "/training"}
+              isEnabled={false}
             />
           </li>
           <li className={styles.dayItem}>
-            <MeasurementDay
-              onClick={() =>
-                console.error("Measurement Day function not implemented")
-              }
-            />
+            <MeasurementDay link={pathname + "/test"} />
           </li>
         </ul>
       </div>

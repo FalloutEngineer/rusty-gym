@@ -65,6 +65,10 @@
   color: var(--main-color);
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 @media (max-width: 991px) {
   .dayLeft {
     font-size: 16px;

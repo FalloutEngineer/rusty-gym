@@ -2,14 +2,26 @@
 import React from "react"
 
 import styles from "./dayTraining.module.css"
+import Link from "next/link"
 
 interface IMeasurementDayProps {
-  onClick: () => void
+  link: string
+  isEnabled?: boolean
 }
 
-export default function MeasurementDay({ onClick }: IMeasurementDayProps) {
+export default function MeasurementDay({
+  link,
+  isEnabled = false,
+}: IMeasurementDayProps) {
   return (
-    <button className={styles.dayItemButtonWrapper} onClick={onClick}>
+    <Link
+      className={
+        styles.dayItemButtonWrapper + " " + (!isEnabled ? styles.disabled : "")
+      }
+      href={link}
+      aria-disabled={!isEnabled}
+      tabIndex={isEnabled ? undefined : -1}
+    >
       <div className={styles.dayLeft}>
         <span>Test</span>
       </div>
@@ -18,6 +30,6 @@ export default function MeasurementDay({ onClick }: IMeasurementDayProps) {
           <span className={styles.restTime}>Do as many reps as you can</span>
         </div>
       </div>
-    </button>
+    </Link>
   )
 }
