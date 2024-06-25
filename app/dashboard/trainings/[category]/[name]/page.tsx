@@ -56,7 +56,7 @@ export default function Training() {
             />
           </li>
           <li className={styles.dayItem}>
-            <MeasurementDay link={pathname + "/test"} />
+            <MeasurementDay link={pathname + "/measurement"} isEnabled={true} />
           </li>
         </ul>
       </div>
