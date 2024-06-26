@@ -15,8 +15,8 @@ export default function Dashboard() {
           image={"/next.svg"}
         />
         <MenuButton
-          title={"Program"}
-          href={"./dashboard/program"}
+          title={"Programs"}
+          href={"./dashboard/programs"}
           image={"/vercel.svg"}
         />
       </Grid>

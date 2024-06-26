@@ -1,0 +1,177 @@
+.header {
+  font-size: 28px;
+}
+
+.heading {
+}
+
+.body {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.section {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section {
+  margin-top: 25px;
+}
+
+.sectionHeading {
+  font-size: 22px;
+
+  position: relative;
+
+  z-index: 2;
+
+  background-color: rgb(65, 65, 65);
+  padding: 0px 15px;
+}
+
+.sectionHeadingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  width: 100%;
+}
+
+.sectionHeadingWrapper::before {
+  content: "";
+  position: absolute;
+
+  width: 100%;
+  height: 3px;
+
+  left: 0;
+
+  background-color: rgb(133, 133, 133);
+}
+
+.sectionBody {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+
+  gap: 7px;
+
+  margin-top: 15px;
+}
+
+.program {
+  width: calc(25% - 6px);
+
+  background-color: rgb(83, 83, 83);
+}
+
+.image {
+}
+
+.imagePlaceholder {
+}
+
+.image,
+.imagePlaceholder {
+  width: 100%;
+  background-color: gray;
+  height: auto;
+
+  aspect-ratio: 1;
+}
+
+.programLower {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  padding: 7px;
+}
+
+.programHeading {
+}
+
+.programLevel {
+}
+
+.levelFig {
+  display: flex;
+  height: 5px;
+  width: 100%;
+}
+
+.levelFig.beginner {
+  background-color: greenyellow;
+}
+
+.levelFig.intermediate {
+  background-color: orange;
+}
+
+.levelFig.advanced {
+  background-color: red;
+}
+
+.programLevel.beginner {
+  color: greenyellow;
+}
+
+.programLevel.intermediate {
+  color: orange;
+}
+
+.programLevel.advanced {
+  color: red;
+}
+
+@media (max-width: 991px) {
+  .header {
+    font-size: 28px;
+  }
+
+  .body {
+    gap: 15px;
+  }
+
+  .section {
+    margin-top: 25px;
+  }
+
+  .sectionHeading {
+    font-size: 22px;
+    padding: 0px 15px;
+  }
+
+  .sectionBody {
+    gap: 7px;
+    margin-top: 15px;
+  }
+
+  .program {
+    width: calc(50% - 6px);
+  }
+
+  .programLower {
+    gap: 7px;
+
+    padding: 7px;
+  }
+}
