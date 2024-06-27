@@ -1,0 +1,50 @@
+.body {
+}
+
+.header {
+}
+
+.heading {
+}
+
+.trainings {
+  margin-top: 25px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.training {
+  width: calc(25% - 4px);
+  background-color: rgb(83, 83, 83);
+}
+
+.trainingImage {
+}
+
+.trainingImagePlaceholder {
+  background-color: rgb(128, 128, 128);
+
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  aspect-ratio: 1;
+}
+
+.trainingLower {
+  padding: 7px;
+}
+
+.trainingHeading {
+}
+
+@media (max-width: 991px) {
+  .training {
+    width: calc(50% - 4px);
+    background-color: rgb(83, 83, 83);
+  }
+}
