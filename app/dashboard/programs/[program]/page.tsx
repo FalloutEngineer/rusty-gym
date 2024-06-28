@@ -55,7 +55,6 @@ export default function Program() {
   const trainings: TrainingObject[] = trainingsTemp.filter(
     (training) => training
   )
-
   return (
     <div className={styles.body}>
       <div className={styles.header}>
@@ -92,4 +91,29 @@ export default function Program() {
       </div>
     </div>
   )
+}
+
+export async function getStaticPaths() {
+  const paths: { params: { program: string } }[] = []
+
+  const allTrainings: any[] = []
+
+  programsObject.sections.forEach((section) => {
+    allTrainings.push(...section.programs)
+  })
+
+  const allTrainingsIds = allTrainings.map((training) => training.id)
+
+  allTrainingsIds.forEach((training) => {
+    paths.push({
+      params: {
+        program: training,
+      },
+    })
+  })
+
+  return {
+    paths: paths,
+    fallback: false,
+  }
 }
