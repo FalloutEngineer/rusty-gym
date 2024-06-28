@@ -13,8 +13,6 @@ import { usePathname } from "next/navigation"
 export default function Training() {
   const pathname = usePathname()
 
-  console.log(pathname)
-
   return (
     <div className={styles.body}>
       <div className={styles.header}>
