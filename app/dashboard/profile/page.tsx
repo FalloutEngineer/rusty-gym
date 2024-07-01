@@ -9,10 +9,7 @@ import styles from "./styles.module.css"
 import Loader from "@/app/components/Util/Loader"
 import Unauthorized from "@/app/components/Util/Unauthorized"
 import EditControls from "@/app/components/Dashboard/Profile/EditControls"
-import {
-  fetchUserResults,
-  updateUserResult,
-} from "@/app/services/userResultsService"
+import { fetchUserData } from "@/app/services/userResultsService"
 
 export default function Profile() {
   const [userRepsArray, setUserRepsArray]: any = useState(null)
@@ -58,10 +55,6 @@ export default function Profile() {
         },
       })
 
-      const uid = user.uid
-
-      updateUserResult(uid, repsValues)
-
       disableEditRepsMode()
     }
   }
@@ -71,9 +64,13 @@ export default function Profile() {
       if (user) {
         const uid = user.uid
 
-        const arrayOfMaxReps = await fetchUserResults(uid)
+        const userData = await fetchUserData(uid)
 
-        setUserRepsArray(arrayOfMaxReps)
+        console.log(userData)
+
+        // const arrayOfMaxReps = await fetchUserResults(uid)
+
+        // setUserRepsArray(arrayOfMaxReps)
       }
     }
 
@@ -106,7 +103,7 @@ export default function Profile() {
               </div>
               <div className={styles.sectionBody}>
                 <ul className={styles.resultsList}>
-                  {userRepsArray ? (
+                  {/* {userRepsArray ? (
                     userRepsArray.map((sport: any) => {
                       return (
                         <li key={sport[0]} className={styles.resultSection}>
@@ -132,7 +129,7 @@ export default function Profile() {
                     })
                   ) : (
                     <Loader />
-                  )}
+                  )} */}
                 </ul>
                 <EditControls
                   isEditMode={isEditRepsMode}
