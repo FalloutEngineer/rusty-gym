@@ -8,26 +8,70 @@ import Image from "next/image"
 import styles from "./styles.module.css"
 import Loader from "@/app/components/Util/Loader"
 import Unauthorized from "@/app/components/Util/Unauthorized"
+import EditControls from "@/app/components/Dashboard/Profile/EditControls"
+import {
+  fetchUserResults,
+  updateUserResult,
+} from "@/app/services/userResultsService"
 
 export default function Profile() {
   const [userRepsArray, setUserRepsArray]: any = useState(null)
 
+  const [isEditRepsMode, setIsEditRepsMode] = useState(false)
+
+  const [repsValues, setRepsValues] = useState({
+    PullUps: {
+      Chin: 0,
+      Regular: 0,
+    },
+    PushUps: {
+      Knee: 0,
+      Regular: 0,
+      Wide: 0,
+      Diamond: 0,
+    },
+  })
+
   const { user } = UserAuth()
+
+  function enableEditRepsMode() {
+    setIsEditRepsMode(true)
+  }
+
+  function disableEditRepsMode() {
+    setIsEditRepsMode(false)
+  }
+
+  function saveEditedReps() {
+    if (user) {
+      alert("Test function triggered!")
+      setRepsValues({
+        PullUps: {
+          Chin: 5,
+          Regular: 5,
+        },
+        PushUps: {
+          Knee: 5,
+          Regular: 5,
+          Wide: 5,
+          Diamond: 5,
+        },
+      })
+
+      const uid = user.uid
+
+      updateUserResult(uid, repsValues)
+
+      disableEditRepsMode()
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       if (user) {
-        console.log(user)
-
         const uid = user.uid
 
-        const q = query(collection(db, "usersMaxReps"), where("UID", "==", uid))
-
-        const querySnapshot = await getDocs(q)
-
-        const data = querySnapshot.docs.map((doc) => doc.data())
-
-        const arrayOfMaxReps = Object.entries(data[0].MaxReps)
+        const arrayOfMaxReps = await fetchUserResults(uid)
 
         setUserRepsArray(arrayOfMaxReps)
       }
@@ -90,6 +134,12 @@ export default function Profile() {
                     <Loader />
                   )}
                 </ul>
+                <EditControls
+                  isEditMode={isEditRepsMode}
+                  enableEditModeFunc={enableEditRepsMode}
+                  disableEditModeFunc={disableEditRepsMode}
+                  saveResults={saveEditedReps}
+                />
               </div>
             </section>
             <section className={styles.section}>
