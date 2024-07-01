@@ -36,6 +36,12 @@ export default function Training() {
         <h3 className={styles.subheading}>Workout plan</h3>
         <ul className={styles.daysList}>
           <li className={styles.dayItem}>
+            <MeasurementDay
+              link={pathname + "/measurement"}
+              isEnabled={false}
+            />
+          </li>
+          <li className={styles.dayItem}>
             <DayTraining
               day={1}
               link={pathname + "/training"}
@@ -52,9 +58,6 @@ export default function Training() {
               link={pathname + "/training"}
               isEnabled={false}
             />
-          </li>
-          <li className={styles.dayItem}>
-            <MeasurementDay link={pathname + "/measurement"} isEnabled={true} />
           </li>
         </ul>
       </div>

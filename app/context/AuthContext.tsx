@@ -8,13 +8,13 @@ import {
 import { auth } from "../firebase/config"
 
 const AuthContext = createContext<AuthContextInterface>({
-  user: "Vlad",
+  user: null,
   googleSignIn: null,
   logOut: null,
 })
 
 export const AuthContextProvider = ({ children }: { children: any }) => {
-  const [user, setUser] = useState("Vlad")
+  const [user, setUser] = useState(null)
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider()
