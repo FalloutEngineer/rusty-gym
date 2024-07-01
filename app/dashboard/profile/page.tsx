@@ -39,6 +39,10 @@ export default function Profile() {
     setIsEditRepsMode(false)
   }
 
+  function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
+
   function saveEditedReps() {
     if (user) {
       alert("Test function triggered!")
@@ -68,9 +72,27 @@ export default function Profile() {
 
         console.log(userData)
 
-        // const arrayOfMaxReps = await fetchUserResults(uid)
+        let sportsArray: (string | any[])[][] = []
 
-        // setUserRepsArray(arrayOfMaxReps)
+        if (userData && userData.Sport) {
+          userData.Sport.forEach((sport) => {
+            console.log(sport)
+
+            let temp: any[] = []
+
+            if (sport.exercises) {
+              sport.exercises.forEach((exercise) => {
+                temp.push([exercise.id, exercise.data.maxRep])
+              })
+            }
+
+            sportsArray.push([sport.id, temp])
+          })
+        }
+
+        console.log(sportsArray)
+
+        setUserRepsArray(sportsArray)
       }
     }
 
@@ -103,25 +125,24 @@ export default function Profile() {
               </div>
               <div className={styles.sectionBody}>
                 <ul className={styles.resultsList}>
-                  {/* {userRepsArray ? (
+                  {userRepsArray ? (
                     userRepsArray.map((sport: any) => {
                       return (
                         <li key={sport[0]} className={styles.resultSection}>
                           <h3>{sport[0]}</h3>
                           <div className={styles.resultListWrapper}>
                             <ul className={styles.resultList}>
-                              {Object.entries(sport[1]).map(
-                                (sportSubtype: any) => {
-                                  return (
-                                    <li
-                                      key={sportSubtype[0]}
-                                      className={styles.resultItem}
-                                    >
-                                      {sportSubtype[0]}: {sportSubtype[1]}
-                                    </li>
-                                  )
-                                }
-                              )}
+                              {sport[1].map((sportSubtype: any) => {
+                                return (
+                                  <li
+                                    key={sportSubtype[0]}
+                                    className={styles.resultItem}
+                                  >
+                                    {capitalizeFirstLetter(sportSubtype[0])}:{" "}
+                                    {sportSubtype[1]}
+                                  </li>
+                                )
+                              })}
                             </ul>
                           </div>
                         </li>
@@ -129,7 +150,7 @@ export default function Profile() {
                     })
                   ) : (
                     <Loader />
-                  )} */}
+                  )}
                 </ul>
                 <EditControls
                   isEditMode={isEditRepsMode}
