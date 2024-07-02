@@ -70,14 +70,10 @@ export default function Profile() {
 
         const userData = await fetchUserData(uid)
 
-        console.log(userData)
-
         let sportsArray: (string | any[])[][] = []
 
         if (userData && userData.Sport) {
           userData.Sport.forEach((sport) => {
-            console.log(sport)
-
             let temp: any[] = []
 
             if (sport.exercises) {
@@ -89,9 +85,6 @@ export default function Profile() {
             sportsArray.push([sport.id, temp])
           })
         }
-
-        console.log(sportsArray)
-
         setUserRepsArray(sportsArray)
       }
     }
