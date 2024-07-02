@@ -13,61 +13,73 @@ import {
   fetchUserData,
   updateExerciseData,
 } from "@/app/services/userResultsService"
+import SportItem from "@/app/components/Dashboard/Profile/SportItem"
+
+type ExercisesToUpdateDataType = {
+  maxRep: number
+  currentDay: number
+}
+
+type ExercisesToUpdateType = {
+  sport: string
+  exercise: string
+  data: Partial<ExercisesToUpdateDataType>
+}
 
 export default function Profile() {
   const [userRepsArray, setUserRepsArray]: any = useState(null)
 
-  const [isEditRepsMode, setIsEditRepsMode] = useState(false)
+  const [isEditTrainingsMode, setisEditTrainingsMode] = useState(false)
 
-  const [repsValues, setRepsValues] = useState({
-    PullUps: {
-      Chin: 0,
-      Regular: 0,
-    },
-    PushUps: {
-      Knee: 0,
-      Regular: 0,
-      Wide: 0,
-      Diamond: 0,
-    },
-  })
+  const [exercisesToUpdate, setExercisesToUpdate] = useState<
+    ExercisesToUpdateType[]
+  >([])
 
   const { user } = UserAuth()
 
   function enableEditRepsMode() {
-    setIsEditRepsMode(true)
+    setisEditTrainingsMode(true)
   }
 
   function disableEditRepsMode() {
-    setIsEditRepsMode(false)
-  }
-
-  function capitalizeFirstLetter(string: string) {
-    return string.charAt(0).toUpperCase() + string.slice(1)
+    setisEditTrainingsMode(false)
   }
 
   function saveEditedReps() {
     if (user) {
       alert("Test function triggered!")
-      setRepsValues({
-        PullUps: {
-          Chin: 5,
-          Regular: 5,
-        },
-        PushUps: {
-          Knee: 5,
-          Regular: 5,
-          Wide: 5,
-          Diamond: 5,
-        },
-      })
 
-      updateExerciseData(user.uid, "PullUps", "chin", {
-        maxRep: 44,
-        currentDay: 0,
+      exercisesToUpdate.forEach((exercise) => {
+        updateExerciseData(
+          user.uid,
+          exercise.sport,
+          exercise.exercise,
+          exercise.data
+        )
       })
 
       disableEditRepsMode()
+    }
+  }
+
+  function addOrUpdateExerciseToUpdate(
+    sport: string,
+    exercise: string,
+    newVal: any
+  ) {
+    let index: number
+
+    index = exercisesToUpdate.findIndex((el) => {
+      return (
+        el.sport === sport && el.exercise === exercise && el.data === newVal
+      )
+    })
+
+    if (index < 0) {
+      setExercisesToUpdate([
+        ...exercisesToUpdate,
+        { sport: sport, exercise: exercise, data: newVal },
+      ])
     }
   }
 
@@ -86,7 +98,7 @@ export default function Profile() {
 
             if (sport.exercises) {
               sport.exercises.forEach((exercise) => {
-                temp.push([exercise.id, exercise.data.maxRep])
+                temp.push(exercise)
               })
             }
 
@@ -135,13 +147,29 @@ export default function Profile() {
                             <ul className={styles.resultList}>
                               {sport[1].map((sportSubtype: any) => {
                                 return (
-                                  <li
-                                    key={sportSubtype[0]}
-                                    className={styles.resultItem}
-                                  >
-                                    {capitalizeFirstLetter(sportSubtype[0])}:{" "}
-                                    {sportSubtype[1]}
-                                  </li>
+                                  <SportItem
+                                    key={sportSubtype.id}
+                                    sportSubtype={sportSubtype}
+                                    isEditMode={isEditTrainingsMode}
+                                    updateMaxRepsFunc={(newVal) => {
+                                      console.log(newVal)
+
+                                      addOrUpdateExerciseToUpdate(
+                                        sport[0],
+                                        sportSubtype.id,
+                                        { maxRep: newVal }
+                                      )
+                                    }}
+                                    updateDayFunc={(newVal) => {
+                                      console.log(newVal)
+
+                                      addOrUpdateExerciseToUpdate(
+                                        sport[0],
+                                        sportSubtype.id,
+                                        { currentDay: newVal }
+                                      )
+                                    }}
+                                  />
                                 )
                               })}
                             </ul>
@@ -154,7 +182,7 @@ export default function Profile() {
                   )}
                 </ul>
                 <EditControls
-                  isEditMode={isEditRepsMode}
+                  isEditMode={isEditTrainingsMode}
                   enableEditModeFunc={enableEditRepsMode}
                   disableEditModeFunc={disableEditRepsMode}
                   saveResults={saveEditedReps}
