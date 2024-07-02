@@ -1,7 +1,13 @@
 .editControlsWrapper {
+  display: flex;
+
+  gap: 5px;
 }
 
 .button {
+  padding: 3px 9px;
+
+  font-size: 18px;
 }
 
 .edit {
