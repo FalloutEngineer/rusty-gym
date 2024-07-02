@@ -60,41 +60,60 @@ export const fetchUserData = async (uid: string) => {
   }
 }
 
-// Функція для додавання нового результату
-// export const addUserResult = async (uid: string, sport: string, resultData: number) => {
-//   const sportsResultsCollectionRef = collection(
-//     doc(db, "users", uid),
-//     "sportsResults"
-//   )
-//   await setDoc(doc(sportsResultsCollectionRef), {
-//     sport,
-//     ...resultData,
-//   })
-// }
+export const updateExerciseData = async (
+  uid: string,
+  sportId: string,
+  exerciseId: string,
+  updatedData: Partial<any>
+) => {
+  try {
+    const userDocRef = doc(db, "usersData", uid)
+    const sportDocRef = doc(userDocRef, "Sport", sportId)
+    const exerciseDocRef = doc(sportDocRef, "exercises", exerciseId)
 
-// Функція для оновлення існуючого результату
-// export const updateUserResult = async (uid: string, updatedData: any) => {
+    if (updatedData.currentDay) {
+      if (typeof updatedData.currentDay === "number") {
+        if (updatedData.currentDay >= 0 && updatedData.currentDay <= 3) {
+          await updateDoc(exerciseDocRef, updatedData)
+
+          console.log(`Дані про вправу з ID: ${exerciseId} успішно оновлено`)
+
+          return
+        }
+      }
+    } else {
+      await updateDoc(exerciseDocRef, updatedData)
+
+      console.log(`Дані про вправу з ID: ${exerciseId} успішно оновлено`)
+
+      return
+    }
+    console.error(
+      "Помилка при оновленні даних про вправу в Firestore:",
+      "currentDay не є числом від 0 до 3"
+    )
+  } catch (error) {
+    console.error("Помилка при оновленні даних про вправу в Firestore:", error)
+  }
+}
+
+// export const updateUserDay = async (uid: string, newDay: number) => {
 //   try {
-//     const q = query(collection(db, "usersMaxReps"), where("UID", "==", uid))
-//     const querySnapshot = await getDocs(q)
+//     if (newDay >= 0 && newDay <= 6) {
+//       const userCollectionRef = collection(db, "usersData")
+//       const userDocRef = doc(userCollectionRef, uid)
 
-//     // Проходимося по кожному документу, що відповідає умові
-//     querySnapshot.forEach(async (document) => {
-//       const userDocRef = doc(db, "usersMaxReps", document.id) // Посилання на кожен знайдений документ
+//       await updateDoc(userDocRef, { Day: newDay })
 
-//       // Оновлюємо поле MaxReps у документі з новими даними
-//       await setDoc(userDocRef, { MaxReps: updatedData }, { merge: true })
-//     })
-
-//     console.log("Поле MaxReps оновлено успішно")
+//       console.log("Day updated successfully")
+//     } else {
+//       console.log("Day must be in range from 0 to 6")
+//       throw new Error("Day must be in range from 0 to 6")
+//     }
+//     console.log("Day updated successfully")
 //   } catch (error) {
-//     console.error("Помилка при оновленні поля MaxReps:", error)
+//     console.log("Error on updating day", error)
+
 //     throw error // Обробте помилку відповідно до вашого використання
 //   }
-// }
-
-// // Функція для видалення результату
-// export const deleteUserResult = async (uid, resultId) => {
-//   const resultDocRef = doc(db, "users", uid, "sportsResults", resultId)
-//   await deleteDoc(resultDocRef)
 // }

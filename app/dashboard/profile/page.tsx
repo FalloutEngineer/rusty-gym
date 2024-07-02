@@ -9,7 +9,10 @@ import styles from "./styles.module.css"
 import Loader from "@/app/components/Util/Loader"
 import Unauthorized from "@/app/components/Util/Unauthorized"
 import EditControls from "@/app/components/Dashboard/Profile/EditControls"
-import { fetchUserData } from "@/app/services/userResultsService"
+import {
+  fetchUserData,
+  updateExerciseData,
+} from "@/app/services/userResultsService"
 
 export default function Profile() {
   const [userRepsArray, setUserRepsArray]: any = useState(null)
@@ -57,6 +60,11 @@ export default function Profile() {
           Wide: 5,
           Diamond: 5,
         },
+      })
+
+      updateExerciseData(user.uid, "PullUps", "chin", {
+        maxRep: 44,
+        currentDay: 0,
       })
 
       disableEditRepsMode()
