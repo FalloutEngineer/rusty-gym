@@ -47,8 +47,6 @@ export default function Profile() {
 
   function saveEditedReps() {
     if (user) {
-      alert("Test function triggered!")
-
       exercisesToUpdate.forEach((exercise) => {
         updateExerciseData(
           user.uid,
@@ -152,8 +150,6 @@ export default function Profile() {
                                     sportSubtype={sportSubtype}
                                     isEditMode={isEditTrainingsMode}
                                     updateMaxRepsFunc={(newVal) => {
-                                      console.log(newVal)
-
                                       addOrUpdateExerciseToUpdate(
                                         sport[0],
                                         sportSubtype.id,
@@ -161,8 +157,6 @@ export default function Profile() {
                                       )
                                     }}
                                     updateDayFunc={(newVal) => {
-                                      console.log(newVal)
-
                                       addOrUpdateExerciseToUpdate(
                                         sport[0],
                                         sportSubtype.id,
