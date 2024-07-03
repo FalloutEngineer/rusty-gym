@@ -1,6 +1,6 @@
 import type { ProgramsObject } from "./types"
 
-import { TrainingLevels } from "./enums.ts"
+import { TrainingLevels } from "./enums"
 
 export const programsObject: ProgramsObject = {
   sections: [

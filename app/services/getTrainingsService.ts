@@ -23,6 +23,14 @@ export const getCategories = async () => {
   return exercisesData
 }
 
-export const getAllTrainingsInCategory = (category: string) => {}
+export const getAllTrainingsInCategory = async (category: string) => {
+  const q = collection(db, "exercises", category, "exercises")
+  const querySnapshot = await getDocs(q)
+  const exercises = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }))
+  return exercises
+}
 
 export const getSingleTraining = (category: string, name: string) => {}

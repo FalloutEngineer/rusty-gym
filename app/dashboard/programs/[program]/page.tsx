@@ -93,27 +93,27 @@ export default function Program() {
   )
 }
 
-export async function getStaticPaths() {
-  const paths: { params: { program: string } }[] = []
+// export async function getStaticPaths() {
+//   const paths: { params: { program: string } }[] = []
 
-  const allTrainings: any[] = []
+//   const allTrainings: any[] = []
 
-  programsObject.sections.forEach((section) => {
-    allTrainings.push(...section.programs)
-  })
+//   programsObject.sections.forEach((section) => {
+//     allTrainings.push(...section.programs)
+//   })
 
-  const allTrainingsIds = allTrainings.map((training) => training.id)
+//   const allTrainingsIds = allTrainings.map((training) => training.id)
 
-  allTrainingsIds.forEach((training) => {
-    paths.push({
-      params: {
-        program: training,
-      },
-    })
-  })
+//   allTrainingsIds.forEach((training) => {
+//     paths.push({
+//       params: {
+//         program: training,
+//       },
+//     })
+//   })
 
-  return {
-    paths: paths,
-    fallback: false,
-  }
-}
+//   return {
+//     paths: paths,
+//     fallback: false,
+//   }
+// }

@@ -11,12 +11,12 @@ interface ITrainingProps {
   restTime: number
 }
 
-export default function Training({
-  reps = [1337, 228, 69, 5, 1],
-  isTimed = true,
-  videoLink = "https://www.youtube.com/watch?v=cvq7Jy-TFAU",
-  restTime = 3,
-}: ITrainingProps) {
+export default function Training() {
+  const reps = [1337, 228, 69, 5, 1]
+  const isTimed = true
+  const videoLink = "https://www.youtube.com/watch?v=cvq7Jy-TFAU"
+  const restTime = 3
+
   const [currentReps, setCurrentReps] = useState(reps[0])
   const [currentRep, setCurrentRep] = useState(0)
 

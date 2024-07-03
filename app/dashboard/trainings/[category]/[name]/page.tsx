@@ -65,22 +65,22 @@ export default function Training() {
   )
 }
 
-export async function getStaticPaths() {
-  const paths: { params: { category: string; name: string } }[] = []
+// export async function getStaticPaths() {
+//   const paths: { params: { category: string; name: string } }[] = []
 
-  data.trainings.forEach((category) => {
-    category.trainings.forEach((training) => {
-      paths.push({
-        params: {
-          category: category.categoryUrl,
-          name: training.url,
-        },
-      })
-    })
-  })
+//   data.trainings.forEach((category) => {
+//     category.trainings.forEach((training) => {
+//       paths.push({
+//         params: {
+//           category: category.categoryUrl,
+//           name: training.url,
+//         },
+//       })
+//     })
+//   })
 
-  return {
-    paths: paths,
-    fallback: false,
-  }
-}
+//   return {
+//     paths: paths,
+//     fallback: true,
+//   }
+// }

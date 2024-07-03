@@ -11,11 +11,11 @@ interface IMeasurmentProps {
   videoLink?: string
 }
 
-export default function MeasurementDayPage({
-  reps = 10,
-  isTimed = true,
-  videoLink = "https://www.youtube.com/watch?v=cvq7Jy-TFAU",
-}: IMeasurmentProps) {
+export default function MeasurementDayPage() {
+  const reps = 10
+  const isTimed = true
+  const videoLink = "https://www.youtube.com/watch?v=cvq7Jy-TFAU"
+
   const [currentReps, setCurrentReps] = useState(reps)
   const [currentRep, setCurrentRep] = useState(0)
 

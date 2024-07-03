@@ -5,11 +5,7 @@ import styles from "../dashboard.module.css"
 import Grid from "../../components/Dashboard/Grid"
 import MenuButton from "../../components/Dashboard/MenuButton"
 import { getCategories } from "@/app/services/getTrainingsService"
-
-type CategoryType = {
-  id: string
-  imageURL: string
-}
+import { CategoryType } from "@/app/types"
 
 export default function FreeTrainings() {
   const [categories, setCategories] = useState<Array<CategoryType>>()

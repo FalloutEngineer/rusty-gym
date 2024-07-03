@@ -37,3 +37,10 @@ export type ProgramsSectionObject = {
 export type ProgramsObject = {
   sections: ProgramsSectionObject[]
 }
+
+type CategoryType = {
+  id: string
+  imageURL: string
+}
+
+type TrainingType = {}
