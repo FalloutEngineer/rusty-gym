@@ -46,8 +46,12 @@ export default function Trainings() {
 
     const fetchTrainings = async () => {
       if (category) {
-        const trainingsRaw = await getAllTrainingsInCategory(category)
-        console.log(trainingsRaw)
+        const trainings = await getAllTrainingsInCategory(category)
+
+        if (trainings) {
+          setTrainings(trainings)
+          console.log(trainings)
+        }
       }
     }
 
@@ -59,23 +63,19 @@ export default function Trainings() {
     <div className={styles.dashboard}>
       <h2 className={styles.dashHeading}>{category}</h2>
       <Grid>
-        {/* {category.trainings.map((training) => {
-          return (
-            <MenuButton
-              title={training.name}
-              href={"./" + categoryURL + "/" + training.url}
-              image={training.imageUrl}
-              key={training.url}
-            />
-          )
-        })} */}
-        {/* {categories
-          ? categories.map((category) => {
+        {trainings
+          ? trainings.map((training) => {
               console.log(category)
-              // return <MenuButton key={category.id} title={category.id} href={"./" + category.id + "/" + training.url} image={undefined} />
+              return (
+                <MenuButton
+                  key={training.id}
+                  title={training.strings.EN.name}
+                  href={"./" + category + "/" + training.id}
+                  image={training.imageURL}
+                />
+              )
             })
-          : ""} */}
-        {""}
+          : ""}
       </Grid>
     </div>
   )
