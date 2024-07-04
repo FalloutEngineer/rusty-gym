@@ -8,10 +8,61 @@ import styles from "./styles.module.css"
 import TrainingMenuItem from "@/app/components/Training/TrainingMenuItem"
 import DayTraining from "@/app/components/Training/DayTraining"
 import MeasurementDay from "@/app/components/Training/MeasurementDay"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import {
+  getAllTrainingsInCategory,
+  getCategories,
+} from "@/app/services/getTrainingsService"
 
 export default function Training() {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const training = pathname.split("/").pop()
+  const category = pathname.split("/").reverse()[1]
+
+  const [trainingObject, setTrainingObject] = useState<any>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const categoriesRaw = await getCategories()
+      const trainingsRaw = await getAllTrainingsInCategory(category)
+
+      const categories = categoriesRaw.map((category) => {
+        return category.id
+      })
+
+      const trainings = trainingsRaw.map((training) => {
+        return training.id
+      })
+
+      if (categories.includes(category)) {
+        if (training) {
+          if (trainings.includes(training)) {
+            const currentTrainingObject = trainingsRaw.find(
+              (trainingObject) => trainingObject.id === training
+            )
+
+            if (currentTrainingObject) {
+              console.log(currentTrainingObject)
+
+              setTrainingObject(currentTrainingObject)
+            } else {
+              router.push("/404")
+            }
+          } else {
+            router.push("/404")
+          }
+        } else {
+          router.push("/404")
+        }
+      } else {
+        router.push("/404")
+      }
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <div className={styles.body}>
@@ -64,23 +115,3 @@ export default function Training() {
     </div>
   )
 }
-
-// export async function getStaticPaths() {
-//   const paths: { params: { category: string; name: string } }[] = []
-
-//   data.trainings.forEach((category) => {
-//     category.trainings.forEach((training) => {
-//       paths.push({
-//         params: {
-//           category: category.categoryUrl,
-//           name: training.url,
-//         },
-//       })
-//     })
-//   })
-
-//   return {
-//     paths: paths,
-//     fallback: true,
-//   }
-// }
