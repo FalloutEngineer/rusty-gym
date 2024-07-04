@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 
 import styles from "./styles.module.css"
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 
 interface ITrainingProps {
   reps: number[]
@@ -16,6 +17,17 @@ export default function Training() {
   const isTimed = true
   const videoLink = "https://www.youtube.com/watch?v=cvq7Jy-TFAU"
   const restTime = 3
+
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const training = pathname.split("/").reverse()[1]
+  const category = pathname.split("/").reverse()[2]
+
+  console.log({
+    training: training,
+    category: category,
+  })
 
   const [currentReps, setCurrentReps] = useState(reps[0])
   const [currentRep, setCurrentRep] = useState(0)
@@ -108,6 +120,8 @@ export default function Training() {
 
     return () => clearInterval(timer)
   }, [isTimerRunning])
+
+  useEffect(() => {}, [])
 
   return (
     <div className={styles.container}>
