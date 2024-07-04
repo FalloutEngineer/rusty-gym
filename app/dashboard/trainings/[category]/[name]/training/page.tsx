@@ -4,6 +4,10 @@ import React, { useEffect, useState } from "react"
 import styles from "./styles.module.css"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+import {
+  getAllTrainingsInCategory,
+  getCategories,
+} from "@/app/services/getTrainingsService"
 
 interface ITrainingProps {
   reps: number[]
@@ -24,10 +28,7 @@ export default function Training() {
   const training = pathname.split("/").reverse()[1]
   const category = pathname.split("/").reverse()[2]
 
-  console.log({
-    training: training,
-    category: category,
-  })
+  const [trainingObject, setTrainingObject] = useState<any>()
 
   const [currentReps, setCurrentReps] = useState(reps[0])
   const [currentRep, setCurrentRep] = useState(0)
@@ -121,7 +122,44 @@ export default function Training() {
     return () => clearInterval(timer)
   }, [isTimerRunning])
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      const categoriesRaw = await getCategories()
+      const trainingsRaw = await getAllTrainingsInCategory(category)
+
+      const categories = categoriesRaw.map((category) => {
+        return category.id
+      })
+
+      const trainings = trainingsRaw.map((training) => {
+        return training.id
+      })
+
+      if (categories.includes(category)) {
+        if (training) {
+          if (trainings.includes(training)) {
+            const currentTrainingObject = trainingsRaw.find(
+              (trainingObject) => trainingObject.id === training
+            )
+
+            if (currentTrainingObject) {
+              setTrainingObject(currentTrainingObject)
+            } else {
+              router.push("/404")
+            }
+          } else {
+            router.push("/404")
+          }
+        } else {
+          router.push("/404")
+        }
+      } else {
+        router.push("/404")
+      }
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <div className={styles.container}>
