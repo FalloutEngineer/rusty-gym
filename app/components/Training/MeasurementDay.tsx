@@ -29,6 +29,11 @@ export default function MeasurementDay({
         <div className={styles.dayRightCenter}>
           <span className={styles.restTime}>Do as many reps as you can</span>
         </div>
+        {isEnabled ? (
+          <div className={styles.completion}>&gt;</div>
+        ) : (
+          <div className={styles.completion + " " + styles.complete}>V</div>
+        )}
       </div>
     </Link>
   )
