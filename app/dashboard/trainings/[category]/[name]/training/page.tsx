@@ -14,13 +14,11 @@ import { getArrayOfReps } from "@/app/services/repsService"
 
 interface ITrainingProps {
   reps: number[]
-  isTimed?: boolean
   videoLink?: string
   restTime: number
 }
 
 export default function Training() {
-  const isTimed = false
   const videoLink = "https://www.youtube.com/watch?v=cvq7Jy-TFAU"
   const restTime = 3
 
@@ -222,6 +220,7 @@ export default function Training() {
   useEffect(() => {
     if (repsArray) {
       setCurrentReps(repsArray[userResult.data.currentDay - 1][0])
+      setTimeLeft(repsArray[userResult.data.currentDay - 1][0])
     }
   }, [repsArray])
 
@@ -240,7 +239,7 @@ export default function Training() {
               <h3 className={styles.restHeading}>Rest: </h3>
               <span className={styles.restNumber}>{currentRestTime}</span>
             </div>
-          ) : isTimed ? (
+          ) : trainingObject && trainingObject.isTimed ? (
             <div className={styles.timedWrapper}>
               <h3>Time left:</h3>
               <span className={styles.currentRep}>{timeLeft}</span>
