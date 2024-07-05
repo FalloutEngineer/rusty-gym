@@ -8,6 +8,9 @@ import {
   getAllTrainingsInCategory,
   getCategories,
 } from "@/app/services/getTrainingsService"
+import { fetchUserData } from "@/app/services/userResultsService"
+import { UserAuth } from "@/app/context/AuthContext"
+import { getArrayOfReps } from "@/app/services/repsService"
 
 interface ITrainingProps {
   reps: number[]
@@ -17,23 +20,28 @@ interface ITrainingProps {
 }
 
 export default function Training() {
-  const reps = [1337, 228, 69, 5, 1]
-  const isTimed = true
+  const isTimed = false
   const videoLink = "https://www.youtube.com/watch?v=cvq7Jy-TFAU"
   const restTime = 3
 
   const pathname = usePathname()
   const router = useRouter()
 
+  const { user } = UserAuth()
+
   const training = pathname.split("/").reverse()[1]
   const category = pathname.split("/").reverse()[2]
 
   const [trainingObject, setTrainingObject] = useState<any>()
 
-  const [currentReps, setCurrentReps] = useState(reps[0])
+  const [userResult, setUserResult] = useState<any>()
+
+  const [repsArray, setRepsArray] = useState<Array<Array<number>>>()
+
+  const [currentReps, setCurrentReps] = useState(0)
   const [currentRep, setCurrentRep] = useState(0)
 
-  const [timeLeft, setTimeLeft] = useState(reps[0])
+  const [timeLeft, setTimeLeft] = useState(0)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
 
   const [isRest, setIsRest] = useState(false)
@@ -50,15 +58,19 @@ export default function Training() {
   }
 
   function repDone() {
-    if (currentRep + 1 < reps.length) {
-      setCurrentRep(currentRep + 1)
-      setCurrentReps(reps[currentRep + 1])
-      setIsTimerRunning(false)
-      setTimeLeft(reps[currentRep + 1])
-      startRest()
-    }
-    if (currentRep + 1 === reps.length) {
-      console.log("Done!")
+    if (repsArray && repsArray[0] && userResult) {
+      if (currentRep + 1 < repsArray[userResult.data.currentDay - 1].length) {
+        setCurrentRep(currentRep + 1)
+        setCurrentReps(
+          repsArray[userResult.data.currentDay - 1][currentRep + 1]
+        )
+        setIsTimerRunning(false)
+        setTimeLeft(repsArray[userResult.data.currentDay - 1][currentRep + 1])
+        startRest()
+      }
+      if (currentRep + 1 === repsArray[userResult.data.currentDay - 1].length) {
+        console.log("Done!")
+      }
     }
   }
 
@@ -143,6 +155,8 @@ export default function Training() {
             )
 
             if (currentTrainingObject) {
+              console.log(currentTrainingObject)
+
               setTrainingObject(currentTrainingObject)
             } else {
               router.push("/404")
@@ -160,6 +174,56 @@ export default function Training() {
 
     fetchData()
   }, [])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (user) {
+          const userData = await fetchUserData(user.uid)
+
+          if (userData) {
+            const trainingObject = userData.Sport.find(
+              (categoryObj) => categoryObj.id === category
+            )
+
+            if (trainingObject) {
+              const userResult = trainingObject.exercises.find(
+                (exerciseObj) => exerciseObj.id === training
+              )
+
+              setUserResult(userResult)
+            } else {
+              throw new Error("There is no record about exercise")
+            }
+          } else {
+            throw new Error("Can't get user data")
+          }
+        }
+      } catch (error) {
+        alert(error)
+      }
+    }
+
+    fetchData()
+  }, [trainingObject])
+
+  useEffect(() => {
+    if (trainingObject && userResult) {
+      const tempArrayOfReps = getArrayOfReps(
+        userResult.data.maxRep,
+        trainingObject.modifier,
+        trainingObject.firstRepModifier,
+        trainingObject.nextRepModifier
+      )
+      setRepsArray(tempArrayOfReps)
+    }
+  }, [trainingObject, userResult])
+
+  useEffect(() => {
+    if (repsArray) {
+      setCurrentReps(repsArray[userResult.data.currentDay - 1][0])
+    }
+  }, [repsArray])
 
   return (
     <div className={styles.container}>
@@ -225,23 +289,43 @@ export default function Training() {
             </button>
           )}
           <ul className={styles.reps}>
-            {reps.map((rep, index) => {
-              return (
-                <li
-                  key={rep}
-                  className={
-                    styles.rep +
-                    " " +
-                    (index === currentRep ? styles.active : "")
-                  }
-                >
-                  {rep}
-                </li>
-              )
-            })}
+            {repsArray &&
+              repsArray[0] &&
+              userResult &&
+              repsArray[userResult.data.currentDay - 1].map((rep, index) => {
+                return (
+                  <li
+                    key={rep}
+                    className={
+                      styles.rep +
+                      " " +
+                      (index === currentRep ? styles.active : "")
+                    }
+                  >
+                    {rep}
+                  </li>
+                )
+              })}
           </ul>
         </div>
       </div>
     </div>
   )
 }
+
+// {
+// reps.map((rep, index) => {
+// return (
+//   <li
+//     key={rep}
+//     className={
+//       styles.rep +
+//       " " +
+//       (index === currentRep ? styles.active : "")
+//     }
+//   >
+//     {rep}
+//   </li>
+// )
+// })
+// }
