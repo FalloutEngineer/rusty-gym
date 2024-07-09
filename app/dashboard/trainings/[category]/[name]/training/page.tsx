@@ -19,8 +19,7 @@ interface ITrainingProps {
 }
 
 export default function Training() {
-  const videoLink = "https://www.youtube.com/watch?v=cvq7Jy-TFAU"
-  const restTime = 3
+  const restTime = 180
 
   const pathname = usePathname()
   const router = useRouter()
@@ -227,9 +226,11 @@ export default function Training() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Link className={styles.videoLink} href={videoLink}>
-          How to do it?
-        </Link>
+        {trainingObject && (
+          <Link className={styles.videoLink} href={trainingObject.videoURL}>
+            How to do it?
+          </Link>
+        )}
       </div>
       <h2 className={styles.heading}>Workout</h2>
       <div className={styles.body}>
