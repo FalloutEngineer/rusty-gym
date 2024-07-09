@@ -139,31 +139,32 @@ export default function Training() {
             <li className={styles.dayItem}>
               <MeasurementDay
                 link={pathname + "/measurement"}
-                isEnabled={false}
+                isEnabled={userResult.data.currentDay === 0}
               />
             </li>
             <li className={styles.dayItem}>
               <DayTraining
-                day={1}
                 link={pathname + "/training"}
-                isComplete={true}
+                isComplete={userResult.data.currentDay > 1}
+                isEnabled={userResult.data.currentDay === 1}
                 reps={repsArray[0]}
               />
             </li>
             <li className={styles.dayItem}>
               <DayTraining
-                day={2}
                 restTime={90}
                 link={pathname + "/training"}
                 reps={repsArray[1]}
+                isComplete={userResult.data.currentDay > 2}
+                isEnabled={userResult.data.currentDay === 2}
               />
             </li>
             <li className={styles.dayItem}>
               <DayTraining
-                day={3}
                 restTime={120}
                 link={pathname + "/training"}
-                isEnabled={false}
+                isComplete={false}
+                isEnabled={userResult.data.currentDay === 3}
                 reps={repsArray[2]}
               />
             </li>

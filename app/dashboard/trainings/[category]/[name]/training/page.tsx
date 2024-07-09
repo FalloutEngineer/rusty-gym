@@ -154,8 +154,6 @@ export default function Training() {
             )
 
             if (currentTrainingObject) {
-              console.log(currentTrainingObject)
-
               setTrainingObject(currentTrainingObject)
             } else {
               router.push("/404")
@@ -294,6 +292,7 @@ export default function Training() {
             {repsArray &&
               repsArray[0] &&
               userResult &&
+              repsArray[userResult.data.currentDay - 1] &&
               repsArray[userResult.data.currentDay - 1].map((rep, index) => {
                 return (
                   <li
