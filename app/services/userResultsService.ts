@@ -97,6 +97,27 @@ export const updateExerciseData = async (
   }
 }
 
+export const setNextDay = async (
+  currentDay: number,
+  uid: string,
+  sportId: string,
+  exerciseId: string
+) => {
+  try {
+    if (currentDay === 3) {
+      updateExerciseData(uid, sportId, exerciseId, { currentDay: 0 })
+    } else {
+      updateExerciseData(uid, sportId, exerciseId, {
+        currentDay: currentDay + 1,
+      })
+    }
+
+    return "Day updated successfully"
+  } catch (error) {
+    return "Error: " + error
+  }
+}
+
 // export const updateUserDay = async (uid: string, newDay: number) => {
 //   try {
 //     if (newDay >= 0 && newDay <= 6) {

@@ -8,7 +8,7 @@ import {
   getAllTrainingsInCategory,
   getCategories,
 } from "@/app/services/getTrainingsService"
-import { fetchUserData } from "@/app/services/userResultsService"
+import { fetchUserData, setNextDay } from "@/app/services/userResultsService"
 import { UserAuth } from "@/app/context/AuthContext"
 import { getArrayOfReps } from "@/app/services/repsService"
 
@@ -66,7 +66,15 @@ export default function Training() {
         startRest()
       }
       if (currentRep + 1 === repsArray[userResult.data.currentDay - 1].length) {
-        console.log("Done!")
+        setNextDay(userResult.data.currentDay, user.uid, category, training)
+
+        if (pathname) {
+          const newPathArrayTemp = pathname.split("/")
+          newPathArrayTemp.pop()
+          const newPathArray = newPathArrayTemp.join("/")
+
+          router.push(newPathArray)
+        }
       }
     }
   }
@@ -312,20 +320,3 @@ export default function Training() {
     </div>
   )
 }
-
-// {
-// reps.map((rep, index) => {
-// return (
-//   <li
-//     key={rep}
-//     className={
-//       styles.rep +
-//       " " +
-//       (index === currentRep ? styles.active : "")
-//     }
-//   >
-//     {rep}
-//   </li>
-// )
-// })
-// }
