@@ -12,12 +12,6 @@ import { fetchUserData, setNextDay } from "@/app/services/userResultsService"
 import { UserAuth } from "@/app/context/AuthContext"
 import { getArrayOfReps } from "@/app/services/repsService"
 
-interface ITrainingProps {
-  reps: number[]
-  videoLink?: string
-  restTime: number
-}
-
 export default function Training() {
   const restTime = 180
 
