@@ -14,6 +14,7 @@ import {
 import { fetchUserData } from "@/app/services/userResultsService"
 import { UserAuth } from "@/app/context/AuthContext"
 import { getArrayOfReps } from "@/app/services/repsService"
+import { initExercise } from "@/app/services/initServices"
 
 export default function Training() {
   const pathname = usePathname()
@@ -29,6 +30,8 @@ export default function Training() {
   const [userResult, setUserResult] = useState<any>()
 
   const [repsArray, setRepsArray] = useState<Array<Array<number>>>()
+
+  const [isRecordCreationComplete, setRecordCrationComplete] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +70,7 @@ export default function Training() {
     }
 
     fetchData()
-  }, [])
+  }, [isRecordCreationComplete])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,7 +89,14 @@ export default function Training() {
               )
               setUserResult(userResult)
             } else {
-              throw new Error("There is no record about exercise")
+              if (training) {
+                const response = await initExercise(
+                  user.uid,
+                  category,
+                  training
+                )
+                setRecordCrationComplete(true)
+              }
             }
           } else {
             throw new Error("Can't get user data")

@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth"
 import { auth } from "../firebase/config"
+import { initUserDoc } from "../services/initServices"
 
 const AuthContext = createContext<AuthContextInterface>({
   user: null,
@@ -16,9 +17,15 @@ const AuthContext = createContext<AuthContextInterface>({
 export const AuthContextProvider = ({ children }: { children: any }) => {
   const [user, setUser] = useState(null)
 
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     const provider = new GoogleAuthProvider()
-    signInWithPopup(auth, provider)
+    const result = await signInWithPopup(auth, provider)
+
+    const userTemp = result.user
+
+    if (userTemp) {
+      initUserDoc(userTemp.uid)
+    }
   }
 
   const logOut = () => {
