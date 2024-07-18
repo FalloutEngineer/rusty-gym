@@ -70,7 +70,9 @@ export default function Programs() {
                     section.trainings.map((program: any) => {
                       return (
                         <Link
-                          href={"./programs/" + program.id}
+                          href={
+                            "./programs/" + section.category + "/" + program.id
+                          }
                           key={program.id}
                           className={styles.program}
                         >

@@ -56,7 +56,6 @@ export const getAllProgramsInCategory = async (category: string) => {
   })
 
   trainings.sort((a, b) => {
-    // First, compare the names alphabetically
     if (a.strings.EN.name < b.strings.EN.name) {
       return -1
     }
@@ -64,9 +63,32 @@ export const getAllProgramsInCategory = async (category: string) => {
       return 1
     }
 
-    // If names are the same, compare the levels
     return levelOrder[a.level] - levelOrder[b.level]
   })
 
   return trainings
+}
+
+export const getProgramByCategoryAndName = async (
+  category: string,
+  name: string
+) => {
+  const q = collection(db, "trainings", category, "trainings")
+  const querySnapshot = await getDocs(q)
+
+  const trainingDoc = querySnapshot.docs.find((doc) => {
+    return doc.id === name
+  })
+
+  if (!trainingDoc) {
+    throw new Error(
+      `Training program with name "${name}" not found in category "${category}"`
+    )
+  }
+
+  const data = trainingDoc.data() as Omit<TrainingProgram, "id">
+  return {
+    id: trainingDoc.id,
+    ...data,
+  }
 }
