@@ -68,8 +68,6 @@ export default function Programs() {
                 <div className={styles.sectionBody}>
                   {section.trainings &&
                     section.trainings.map((program: any) => {
-                      console.log(program.strings.EN.name)
-
                       return (
                         <Link
                           href={"./programs/" + program.id}
