@@ -14,7 +14,8 @@ export default function Program() {
   const pathname = usePathname()
 
   const [program, setProgram] = useState<any>(null)
-  const [trainings, setTrainings] = useState<any>()
+  const [trainings, setTrainings] = useState<any>(null)
+  const [isTrainingsDone, setTrainingsDone] = useState<boolean>(false)
 
   let pathArray = pathname.split("/")
 
@@ -41,14 +42,17 @@ export default function Program() {
       if (program) {
         try {
           const result: any = []
-          await program.trainings.forEach(async (training: any) => {
+          program.trainings.forEach(async (training: any, index: any) => {
             const res = await getSingleTraining(
               training.category,
               training.name
             )
-            await result.push(res)
+            result.push(res)
+            if (index + 1 === program.trainings.length) {
+              setTrainings(result)
+              setTrainingsDone(true)
+            }
           })
-          setTrainings(result)
         } catch (e) {
           console.error(e)
           alert(e)
@@ -80,7 +84,10 @@ export default function Program() {
         {program &&
           trainings &&
           program.trainings &&
+          isTrainingsDone &&
           program.trainings.map((training: any, index: any) => {
+            console.log(isTrainingsDone)
+
             return (
               <Link
                 key={training.url}
