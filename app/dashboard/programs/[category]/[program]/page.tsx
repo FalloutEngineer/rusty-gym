@@ -8,7 +8,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { getProgramByCategoryAndName } from "@/app/services/getProgramsService"
 import { getSingleTraining } from "@/app/services/getTrainingsService"
-import { log } from "console"
+import MenuButton from "@/app/components/Dashboard/MenuButton"
+import Grid from "@/app/components/Dashboard/Grid"
 
 export default function Program() {
   const pathname = usePathname()
@@ -65,7 +66,7 @@ export default function Program() {
 
   useEffect(() => {
     if (trainings) {
-      console.log(trainings)
+      // console.log(trainings)
     }
   }, [trainings])
 
@@ -80,39 +81,43 @@ export default function Program() {
         <h2 className={styles.heading}>{program && program.strings.EN.name}</h2>
       </div>
 
-      <div className={styles.trainings}>
+      <Grid>
         {program &&
           trainings &&
           program.trainings &&
           isTrainingsDone &&
           program.trainings.map((training: any, index: any) => {
-            console.log(isTrainingsDone)
-
             return (
-              <Link
+              <MenuButton
                 key={training.url}
-                className={styles.training}
-                href={
-                  "/dashboard/trainings/" +
-                  training.category +
-                  "/" +
-                  training.name
-                }
-              >
-                {training.imageURL ? (
-                  <Image src={trainings[index].imageURL} alt={""} />
-                ) : (
-                  <figure className={styles.trainingImagePlaceholder}></figure>
-                )}
-                <div className={styles.trainingLower}>
-                  <h3 className={styles.trainingHeading}>
-                    {trainings[index].strings.EN.name}
-                  </h3>
-                </div>
-              </Link>
+                title={trainings[index].strings.EN.name}
+                href={"./" + training.category + "/" + training.name}
+                image={training.imageURL}
+              />
+              // <Link
+              //   key={training.url}
+              //   className={styles.training}
+              //   href={
+              //     "/dashboard/trainings/" +
+              //     training.category +
+              //     "/" +
+              //     training.name
+              //   }
+              // >
+              //   {training.imageURL ? (
+              //     <Image src={trainings[index].imageURL} alt={""} />
+              //   ) : (
+              //     <figure className={styles.trainingImagePlaceholder}></figure>
+              //   )}
+              //   <div className={styles.trainingLower}>
+              //     <h3 className={styles.trainingHeading}>
+              //       {trainings[index].strings.EN.name}
+              //     </h3>
+              //   </div>
+              // </Link>
             )
           })}
-      </div>
+      </Grid>
     </div>
   )
 }
