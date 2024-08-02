@@ -4,7 +4,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
+  padding-top: 0px;
   /* min-height: 100vh; */
+}
+
+@media (max-width: 991px) {
+  .main {
+    padding: 1rem;
+  }
 }
 
 .description {
@@ -227,4 +234,127 @@
   to {
     transform: rotate(0deg);
   }
+}
+
+.hero {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+}
+
+.heroSubheading {
+  font-size: 24px;
+}
+
+.heroHeading {
+  font-size: 64px;
+}
+
+.logoHighlighted {
+  color: var(--main-color);
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.heroDescription {
+  margin-top: 14px;
+}
+
+.container {
+  max-width: 1199px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.opportunities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 1rem;
+}
+
+.opportunitiesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  grid-template-rows: 1fr 1fr;
+
+  gap: 25px;
+}
+
+@media (max-width: 991px) {
+  .opportunitiesGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+}
+
+.opportunitiesItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.opportunitiesIcon {
+  max-height: 64px;
+  max-width: 64px;
+
+  height: 100%;
+  width: 100%;
+
+  aspect-ratio: 1;
+
+  display: flex;
+
+  -webkit-filter: invert(100%); /* Safari/Chrome */
+  filter: invert(100%);
+}
+
+.opportunitiesHeading {
+  margin-top: 12px;
+}
+
+.opportunitiesDescription {
+  text-align: center;
+
+  margin-top: 7px;
+}
+
+#muscleIcon {
+  background-image: url("../public/icons/muscles.png");
+}
+
+#weightIcon {
+  background-image: url("../public/icons/treadmill.png");
+}
+
+#absIcon {
+  background-image: url("../public/icons/torso.png");
+}
+
+#wideBackIcon {
+  background-image: url("../public/icons/back.png");
+}
+
+#armsIcon {
+  background-image: url("../public/icons/muscle.png");
+}
+
+#strengthIcon {
+  background-image: url("../public/icons/motivation.png");
 }

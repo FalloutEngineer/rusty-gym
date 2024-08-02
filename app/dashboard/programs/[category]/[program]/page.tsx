@@ -91,30 +91,14 @@ export default function Program() {
               <MenuButton
                 key={training.url}
                 title={trainings[index].strings.EN.name}
-                href={"./" + training.category + "/" + training.name}
+                href={
+                  "/dashboard/trainings/" +
+                  training.category +
+                  "/" +
+                  training.name
+                }
                 image={training.imageURL}
               />
-              // <Link
-              //   key={training.url}
-              //   className={styles.training}
-              //   href={
-              //     "/dashboard/trainings/" +
-              //     training.category +
-              //     "/" +
-              //     training.name
-              //   }
-              // >
-              //   {training.imageURL ? (
-              //     <Image src={trainings[index].imageURL} alt={""} />
-              //   ) : (
-              //     <figure className={styles.trainingImagePlaceholder}></figure>
-              //   )}
-              //   <div className={styles.trainingLower}>
-              //     <h3 className={styles.trainingHeading}>
-              //       {trainings[index].strings.EN.name}
-              //     </h3>
-              //   </div>
-              // </Link>
             )
           })}
       </Grid>

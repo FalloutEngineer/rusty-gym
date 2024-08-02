@@ -58,6 +58,7 @@ export default function Navbar() {
           <ul className={styles.list}>
             <li className={styles.item}>
               <Link
+                onClick={toggleMenu}
                 href="/"
                 className={
                   styles.link + " " + (pathname === "/" ? styles.active : "")
@@ -69,6 +70,7 @@ export default function Navbar() {
             {user ? (
               <li className={styles.item}>
                 <Link
+                  onClick={toggleMenu}
                   href="/dashboard"
                   className={
                     styles.link +
@@ -82,6 +84,7 @@ export default function Navbar() {
             ) : null}
             <li className={styles.item}>
               <Link
+                onClick={toggleMenu}
                 href="/about"
                 className={
                   styles.link + " " + (isActive("about") ? styles.active : "")
