@@ -129,7 +129,7 @@ export default function Training() {
         <Image src={""} alt={""} />
         <h2 className={styles.heading}>Regular Push Ups</h2>
       </div>
-      <nav className={styles.menu}>
+      {/* <nav className={styles.menu}>
         <ul className={styles.menuList}>
           <li className={styles.menuItem}>
             <TrainingMenuItem isActive={true} iconURL={undefined} />
@@ -141,7 +141,7 @@ export default function Training() {
             <TrainingMenuItem isActive={false} iconURL={undefined} />
           </li>
         </ul>
-      </nav>
+      </nav> */}
       <div className={styles.trainingContainer}>
         <h3 className={styles.subheading}>Workout plan</h3>
         {repsArray && (
